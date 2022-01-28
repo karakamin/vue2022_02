@@ -13,30 +13,24 @@ const app = createApp({
         checkUser(){
             axios.post(`${this.url}/api/user/check`)
             .then((res) => {
-                // console.log(res.data);
                 if(res.data.success) {
-                    // console.log(this);
-                    // console.log(12345);
                     this.getProdList();
                 } else {
-                    // console.log(res);
-                    console.log(res.data.success)
                     alert("無管理權限");
+                    window.location = "index.html";
                 }
                
             }).catch((err) => {
-                console.log(err);
                 alert("權限異常");
-                // window.location = "index.html";
+                window.location = "index.html";
             })
         },
         getProdList() {
-            // console.log(`${this.url}/api/${this.path}/admin/products`);
+            // 在 success 為 true 時，取得的資料放入 products
             axios.get(`${this.url}/api/${this.path}/admin/products`)
             .then((res) => {
                 if(res.data.success) {
                     this.products = res.data.products;
-                    console.log(this.products);
                 } else {
                     alert(res.data.success);
                 }
@@ -46,7 +40,7 @@ const app = createApp({
             })
         },
         showDetails(item){
-            console.log(item);
+            // 顯示單一產品資料
             this.oneProduct = item; 
         }
     },
